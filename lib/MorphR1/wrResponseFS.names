@@ -1,0 +1,20 @@
+responseTimeWO.
+
+MemoryInfo_used: continuous.
+AvgGetsPerROTransaction: continuous.
+AvgGetsPerWrTransaction: continuous.
+AvgPutsPerWrTransaction: continuous.
+LocalReadOnlyTxLocalServiceTime: continuous.
+LocalUpdateTxLocalServiceTime: continuous.
+AvgClusteredGetCommandReplySize: continuous.
+AvgPrepareCommandSize: continuous.
+PercentageWriteTransactions: continuous.
+NumberOfEntries: continuous.
+NumNodes: continuous.
+ReplicationDegree: continuous.
+responseTimeWO: continuous.
+
+
+
+ attributes included: MemoryInfo_used,AvgGetsPerROTransaction,AvgGetsPerWrTransaction,AvgPutsPerWrTransaction,LocalReadOnlyTxLocalServiceTime,LocalUpdateTxLocalServiceTime,AvgClusteredGetCommandReplySize,NumberOfEntries,NumNodes,ReplicationDegree  
+
