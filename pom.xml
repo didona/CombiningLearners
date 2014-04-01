@@ -169,13 +169,14 @@
       <plugins>
           
           <!-- used for backup purposes -->
+          <!--
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <version>2.6</version>
         <executions>
           <execution>
             <id>copy-resources</id>
-            <!-- here the phase you need -->
+            <!- here the phase you need
             <phase>package</phase>
             <goals>
               <goal>copy-resources</goal>
@@ -196,7 +197,7 @@
           
         </executions>
       </plugin>
-      
+      -->
       
       
       <plugin>
