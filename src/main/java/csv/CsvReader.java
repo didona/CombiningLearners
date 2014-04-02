@@ -61,9 +61,7 @@ public class CsvReader extends RadargunCsvInputOracle implements DataInputOracle
            }
        }
    }
-       
-   
-   
+
    
    
    public double abortRate (int i){

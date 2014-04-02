@@ -1,4 +1,6 @@
 @RELATION batch
 
-@ATTRIBUTE NumNodes                                      NUMERIC
-@ATTRIBUTE ReplicationDegree                             NUMERIC
+@ATTRIBUTE AvgNumPutsBySuccessfulLocalTx                     NUMERIC
+@ATTRIBUTE AvgPrepareCommandSize                             NUMERIC
+
+@DATA

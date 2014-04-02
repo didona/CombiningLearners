@@ -21,6 +21,7 @@ import weka.core.converters.ConverterUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -31,7 +32,12 @@ public class Dataset implements eu.cloudtm.Dataset.Dataset {
    static Logger logger = Logger.getLogger(Dataset.class.getName());
 
    public static Instances DataBoosting;
-   protected BoostingConfiguration BC = BoostingConfiguration.getInstance();
+   protected BoostingConfiguration BC = boostConfig();
+
+   protected BoostingConfiguration boostConfig() {
+      return BoostingConfiguration.getInstance();
+   }
+
 
    public Dataset(String Directory_path) throws Exception {
 
@@ -61,6 +67,7 @@ public class Dataset implements eu.cloudtm.Dataset.Dataset {
                      CsvReader reader = new CsvReader(new CsvRgParams(csv.getPath()));
 
                      Instance i = DataConverter.FromInputOracleToInstance(reader);
+                     System.out.println(Arrays.toString(i.toDoubleArray()));
                      double[] Outputs = additionalStats(reader);
 //                     Outputs[0] = reader.throughput(0) + reader.throughput(1);
 //                     Outputs[1] = reader.abortRate(1);
@@ -69,6 +76,7 @@ public class Dataset implements eu.cloudtm.Dataset.Dataset {
 
                      both = DataPrinting.addTwoArray(i.toDoubleArray(), Outputs);
                      Instance I = new DenseInstance(1, both);
+                     System.out.println(Arrays.toString(I.toDoubleArray()));
                      DataBoosting.add(I);
                      numFiles++;
 
