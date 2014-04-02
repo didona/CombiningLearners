@@ -9,7 +9,7 @@ import eu.cloudtm.Configuration.BoostingConfiguration;
  */
 public class BoostingConfigurationBatch extends BoostingConfiguration {
 
-   private final static String arff =  "conf/batch/Boosting_batch.properties";
+   private final static String arff = "conf/batch/Boosting_batch.properties";
 
    public BoostingConfigurationBatch() {
       super(arff);

@@ -4,7 +4,6 @@ import batching.offline.BatchingPaoloAnalyticalOracle;
 import eu.cloudtm.DataUtility.DataConverter;
 import eu.cloudtm.autonomicManager.oracles.InputOracle;
 import eu.cloudtm.autonomicManager.oracles.OutputOracle;
-import eu.cloudtm.boosting.BatchDataSet;
 import eu.cloudtm.boosting.Dataset;
 import org.apache.log4j.PropertyConfigurator;
 import weka.core.Instance;
@@ -36,6 +35,8 @@ public class BatchMain {
          instance = Dataset.DataBoosting.instance(i);
          InputOracle io = DataConverter.FromInstancesToInputOracle(instance);
          try {
+            //Here you update the quality of the model
+            BatchingPaoloAnalyticalOracle.optimalValues();
             OutputOracle oo = new BatchingPaoloAnalyticalOracle().forecast(io);
             real = instance.value(instance.numAttributes() - 1);
             pred = oo.responseTime(0);

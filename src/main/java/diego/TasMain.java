@@ -17,7 +17,7 @@ import java.io.PrintWriter;
  * @email didona@gsd.inesc-id.pt
  * @since 01/04/14
  */
-public class Main {
+public class TasMain {
 
    public static void main(String[] args) throws Exception {
       System.out.println("Hello World!");

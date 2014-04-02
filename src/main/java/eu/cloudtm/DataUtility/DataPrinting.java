@@ -237,7 +237,6 @@ public class DataPrinting {
 
       Logger log = Logger.getLogger("ARFFLogger");
       log.info(i);
-      System.out.println(i);
 
    }
 

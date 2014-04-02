@@ -88,18 +88,16 @@ public class DataConverter {
 
       for (int i = 0; i < source.getStructure().numAttributes(); i++) {
          String parameter = source.getStructure().attribute(i).name();
-         System.out.println(parameter + "_1");
 
          try {
 
             ParamValue = new Double(input.getParam(Param.valueOf(parameter)) + "");
             inst.setValue(source.getStructure().attribute(i), ParamValue);
-            System.out.println(parameter + "_2");
+
 
          } catch (IllegalArgumentException e) {
 
             try {
-               System.out.println(parameter + "_3");
                ForecastValue = ParameterClassConversion.ConvertTo(ForecastParam.valueOf(parameter), input.getForecastParam(ForecastParam.valueOf(parameter)));
 
                inst.setValue(source.getStructure().attribute(i), ForecastValue.doubleValue());
@@ -107,7 +105,6 @@ public class DataConverter {
             } catch (IllegalArgumentException ef) {
 
                try {
-                  System.out.println(parameter + "_4");
                   EvaluatedParamValue = ParameterClassConversion.ConvertTo(EvaluatedParam.valueOf(parameter), input.getEvaluatedParam(EvaluatedParam.valueOf(parameter)));
 
                   inst.setValue(source.getStructure().attribute(i), EvaluatedParamValue.doubleValue());

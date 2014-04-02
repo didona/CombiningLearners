@@ -1,10 +1,9 @@
-package eu.cloudtm.boosting;
+package diego;
 
 import csv.CsvReader;
-import diego.BoostingConfigurationBatch;
 import eu.cloudtm.Configuration.BoostingConfiguration;
-import eu.cloudtm.DataUtility.DataConverter;
 import eu.cloudtm.autonomicManager.commons.Param;
+import eu.cloudtm.boosting.Dataset;
 import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
@@ -22,13 +21,12 @@ public class BatchDataSet extends Dataset {
    }
 
    protected BoostingConfiguration boostConfig() {
-
       return BoostingConfigurationBatch.getInstance();
    }
 
    protected double[] additionalStats(CsvReader reader) {
       double[] Outputs = new double[1];
-      Outputs[0] = ((Number)reader.getParam(Param.AvgGetsPerWrTransaction)).doubleValue();
+      Outputs[0] = ((Number) reader.getParam(Param.AvgGetsPerWrTransaction)).doubleValue();
       return Outputs;
    }
 
