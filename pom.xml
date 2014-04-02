@@ -82,6 +82,12 @@
         </dependency>
 
         <dependency>
+            <groupId>eu.cloudtm.batch</groupId>
+            <artifactId>BatchOracle</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>Validation</groupId>
             <artifactId>Validation</artifactId>
             <version>1.0-SNAPSHOT</version>

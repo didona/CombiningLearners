@@ -31,7 +31,7 @@ public class Dataset implements eu.cloudtm.Dataset.Dataset {
    static Logger logger = Logger.getLogger(Dataset.class.getName());
 
    public static Instances DataBoosting;
-   private BoostingConfiguration BC = BoostingConfiguration.getInstance();
+   protected BoostingConfiguration BC = BoostingConfiguration.getInstance();
 
    public Dataset(String Directory_path) throws Exception {
 
@@ -106,7 +106,7 @@ public class Dataset implements eu.cloudtm.Dataset.Dataset {
       return f.toString().endsWith("csv");
    }
 
-   private Instances ExtendInstances() throws Exception {
+   protected Instances ExtendInstances() throws Exception {
 
       Instances NewData = new ConverterUtils.DataSource(BC.getOracleInputDescription()).getStructure();
 
