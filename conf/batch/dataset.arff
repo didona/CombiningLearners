@@ -1,0 +1,4 @@
+@RELATION batch
+
+@ATTRIBUTE NumNodes                                      NUMERIC
+@ATTRIBUTE ReplicationDegree                             NUMERIC

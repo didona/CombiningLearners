@@ -32,7 +32,8 @@ public class Demo {
         
         //Boosting
         
-        Dataset d=new Dataset("csvfile"); //Boosting dataset
+        Dataset d=new Dataset("newTasData"); //Boosting dataset
+       System.out.println("Boosting");
         Boosting b=new Boosting();
         
         //Knn

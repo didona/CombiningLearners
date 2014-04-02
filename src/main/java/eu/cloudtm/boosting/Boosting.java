@@ -37,7 +37,7 @@ public class Boosting implements Oracle {
            throw new Exception("Boosting Dataset not present");
        adR=new AdditiveRegression[4];
       
-       String  classifier=BoostingConfiguration.getInstance().getCombiner();
+       String classifier=BoostingConfiguration.getInstance().getCombiner();
        String Iteration=BoostingConfiguration.getInstance().getIteration();
        
        String []Options={"-W",classifier,"-I",Iteration};
