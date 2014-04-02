@@ -1,0 +1,27 @@
+remoteGetRtt
+
+numNodes:continuous
+numThreads:continuous
+replicationDegree:continuous
+remoteNodesInCommit:continuous
+meshSize:=numNodes*remoteNodesInCommit.
+preparePerSec:continuous
+preparePerSecPerNode:=preparePerSec/numNodes.
+commitPerSec:continuous
+commitPerSecPerNode:=commitPerSec/numNodes.
+rollbackPerSec:continuous
+rollbackPerSecPerNode:=rollbackPerSec/numNodes.
+remoteGetPerSec:continuous
+remoteGetPerSecPerNode:=remoteGetPerSec/numNodes.
+prepareMexSize:continuous
+commitMexSize:continuous
+remoteGetReplyMexSize:continuous
+cpuUtilization:continuous
+memory:continuous
+prepareRtt:continuous
+commitRtt:continuous
+remoteGetRtt:continuous
+trafficP:=remoteNodesInCommit*prepareMexSize*preparePerSec.
+trafficPerNode:=trafficP/(numNodes-1).
+
+attributes excluded:commitRtt,prepareRtt,cpuUtilization,memory

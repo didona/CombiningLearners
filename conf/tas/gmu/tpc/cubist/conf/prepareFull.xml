@@ -1,0 +1,4 @@
+<oracle.CubistOracle.common.CubistConfig
+            pathToCubist="conf/tas/gmu/tpc/cubist/comp_140218_full"
+            model="prepareRtt"
+            targetFeature="prepareRtt"/>

@@ -1,0 +1,22 @@
+remoteGetRtt
+
+numNodes:continuous
+numThreads:continuous
+replicationDegree:continuous
+replicationPercentage:=replicationDegree/numNodes.
+remoteNodesInCommit:continuous
+meshSize:=numNodes*remoteNodesInCommit.
+preparePerSec:continuous
+commitPerSec:continuous
+rollbackPerSec:continuous
+remoteGetPerSec:continuous
+prepareMexSize:continuous
+commitMexSize:continuous
+remoteGetReplyMexSize:continuous
+cpuUtilization:continuous
+memory:continuous
+prepareRtt:continuous
+commitRtt:continuous
+remoteGetRtt:continuous
+
+attributes excluded:commitRtt,prepareRtt,cpuUtilization,memory,commitPerSec,preparePerSec

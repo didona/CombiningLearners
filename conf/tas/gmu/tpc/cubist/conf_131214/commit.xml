@@ -1,0 +1,4 @@
+<oracle.CubistOracle.common.CubistConfig
+            pathToCubist="conf/tas/gmu/tpc/cubist/131214/100K"
+            model="commitRtt"
+            targetFeature="commitRtt"/>
