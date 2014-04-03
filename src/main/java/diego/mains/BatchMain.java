@@ -1,6 +1,7 @@
-package diego;
+package diego.mains;
 
 import batching.offline.BatchingPaoloAnalyticalOracle;
+import diego.batch.BatchDataSet;
 import eu.cloudtm.DataUtility.DataConverter;
 import eu.cloudtm.autonomicManager.oracles.InputOracle;
 import eu.cloudtm.autonomicManager.oracles.OutputOracle;

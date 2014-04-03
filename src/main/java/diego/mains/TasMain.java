@@ -1,5 +1,6 @@
-package diego;
+package diego.mains;
 
+import diego.tas.TasDataSet;
 import eu.cloudtm.DataUtility.DataConverter;
 import eu.cloudtm.autonomicManager.oracles.InputOracle;
 import eu.cloudtm.autonomicManager.oracles.OutputOracle;
@@ -25,13 +26,14 @@ public class TasMain {
 
       //Boosting
       System.out.println("Going to create dataset");
-      Dataset d = new Dataset("newTasData"); //Boosting dataset
+      Dataset d = new TasDataSet("newTasData"); //Boosting dataset
       System.out.println("Now using tas");
       PrintWriter pw = new PrintWriter(new FileWriter(new File("conf/out.csv")));
 
       int instances = Dataset.DataBoosting.numInstances();
       double[] predTH = new double[instances];
       double[] realTH = new double[instances];
+
       Instance instance;
       double real, pred;
       pw.println("Real,Real,Pred");

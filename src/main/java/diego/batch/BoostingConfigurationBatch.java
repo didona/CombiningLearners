@@ -1,4 +1,4 @@
-package diego;
+package diego.batch;
 
 import eu.cloudtm.Configuration.BoostingConfiguration;
 

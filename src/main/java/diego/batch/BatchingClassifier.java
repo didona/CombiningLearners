@@ -1,4 +1,4 @@
-package eu.cloudtm.weka.batch;
+package diego.batch;
 
 import batching.offline.BatchingPaoloAnalyticalOracle;
 import eu.cloudtm.DataUtility.DataConverter;

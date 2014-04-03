@@ -1,4 +1,4 @@
-package diego;
+package diego.tas;
 
 import eu.cloudtm.Configuration.BoostingConfiguration;
 import eu.cloudtm.boosting.Dataset;
@@ -15,7 +15,7 @@ public class TasDataSet extends Dataset {
    }
 
    protected BoostingConfiguration boostConfig() {
-         return BoostingConfigurationTAS.getInstance();
-      }
+      return BoostingConfigurationTAS.getInstance();
+   }
 
 }

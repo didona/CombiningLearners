@@ -78,7 +78,7 @@
         <dependency>
             <groupId>eu.cloudtm</groupId>
             <artifactId>CsvInputOracle</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0-ENSEMBLE</version>
         </dependency>
 
         <dependency>

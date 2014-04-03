@@ -1,4 +1,4 @@
-package diego;
+package diego.batch;
 
 import csv.CsvReader;
 import eu.cloudtm.Configuration.BoostingConfiguration;
@@ -31,12 +31,12 @@ public class BatchDataSet extends Dataset {
    }
 
    protected Instances ExtendInstances() throws Exception {
-      System.out.println("=?");
+
       Instances NewData = new ConverterUtils.DataSource(BC.getOracleInputDescription()).getStructure();
 
       NewData.insertAttributeAt(new Attribute("AvgGetsPerWrTransaction"), NewData.numAttributes());
 
-      System.out.println("Extended " + NewData);
+
       return NewData;
    }
 }

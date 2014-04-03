@@ -1,4 +1,4 @@
-package diego;
+package diego.tas;
 
 import eu.cloudtm.Configuration.BoostingConfiguration;
 
