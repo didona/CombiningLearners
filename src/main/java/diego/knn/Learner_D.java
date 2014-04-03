@@ -27,7 +27,6 @@ public abstract class Learner_D {
    protected double[] distances;
    protected double[][] SquaredErrors;
 
-
    private final static Log logger = LogFactory.getLog(Learner_D.class);
 
    private enum targets {
@@ -38,9 +37,7 @@ public abstract class Learner_D {
          this.clazz = clazz;
       }
 
-
    }
-
 
    protected Instances filterInstancesIfNeeded(Instances toFilter) {
       //With new samples we need to do nothing
@@ -99,7 +96,6 @@ public abstract class Learner_D {
       return Math.pow(a - b, 2);
    }
 
-
    private double computePredictionError(targets target, OutputOracle real, OutputOracle pred) {
       switch (target) {
          case Throughput: {
@@ -139,6 +135,4 @@ public abstract class Learner_D {
    }
 
    protected abstract boolean considerInstances(int i);
-
-
 }

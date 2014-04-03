@@ -39,7 +39,6 @@ public class KNNLearner_D extends Learner_D implements Oracle {
       return (DistanceFunction) distanceFunc;
    }
 
-
    public KNNLearner_D() throws Exception {
 
       KNNConfig config = (KNNConfig) KNNConfig.getInstance();
@@ -60,7 +59,6 @@ public class KNNLearner_D extends Learner_D implements Oracle {
          throw new InstantiationException("Datasets Not instanziated");
       }
    }
-
 
    @Override
    public OutputOracle forecast(InputOracle io) throws OracleException {
@@ -103,7 +101,6 @@ public class KNNLearner_D extends Learner_D implements Oracle {
          throw new OracleException(ex);
       }
    }
-
 
    protected boolean considerInstances(int i) {
       return distances[i] < cutoff;

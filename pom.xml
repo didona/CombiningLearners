@@ -70,9 +70,9 @@
         </dependency>                          -->
 
         <dependency>
-            <groupId>weka</groupId>
-            <artifactId>weka</artifactId>
-            <version>3.7</version>
+            <groupId>nz.ac.waikato.cms.weka</groupId>
+            <artifactId>weka-dev</artifactId>
+            <version>3.7.10</version>
         </dependency>
 
         <dependency>

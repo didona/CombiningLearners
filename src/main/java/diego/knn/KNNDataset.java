@@ -168,19 +168,6 @@ public class KNNDataset extends DataSets {
                //CAST IS POSSIBLE
                dat = (DatasetOutputOracle) entry.getKey().forecast(i);
 
-
-                         /* NOT NECESSARY WITH HANDLERS
-                          for (Field f: DatasetOutputOracle.class.getDeclaredFields()){
-
-                              Method method=DatasetOutputOracle.class.getDeclaredMethod("set"+f.getName(),int.class, double.class);
-
-                              Method method2=OutputOracle.class.getDeclaredMethod(f.getName(),int.class);
-
-                              method.invoke(dat,0, method2.invoke(output, 0));
-
-                              method.invoke(dat,1, method2.invoke(output, 1));
-                          }*/
-
                break;
             } catch (OracleException ex) {
                ex.printStackTrace();
