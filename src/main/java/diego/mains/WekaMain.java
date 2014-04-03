@@ -1,8 +1,8 @@
 package diego.mains;
 
+import diego.weka.ModelResult;
+import diego.weka.incremental.WekaIncremental;
 import org.apache.log4j.PropertyConfigurator;
-import weka.ModelResult;
-import weka.incremental.WekaIncremental;
 
 import java.io.File;
 

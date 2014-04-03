@@ -159,6 +159,6 @@ public class WekaIncremental {
    }
 
    private enum WL {
-      SMOREG, MLP, M5P
+      SMOREG, MLP, M5P, KNN
    }
 }

@@ -28,13 +28,13 @@ public abstract class DataSet {
    protected abstract void buildDataSet();
 
    //Merge two sets together, i.e.,
-   protected abstract void merge(DataSet dataSet);
+   public abstract void merge(DataSet dataSet);
 
-   protected abstract WekaDataSet subDataSet(int percentage);
+   public abstract WekaDataSet subDataSet(int percentage);
 
-   protected abstract void remove(DataSet d);
+   public abstract void remove(DataSet d);
 
-   protected abstract long size();
+   public abstract long size();
 
    protected final void info(String s) {
       if (info)
