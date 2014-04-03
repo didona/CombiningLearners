@@ -84,11 +84,9 @@ public class KNNLearner_D extends Learner_D implements Oracle {
 
 
          double actual;
-         for (Map.Entry<Oracle, Double[]> entry : RMSE.entrySet()) {
+         for (Map.Entry<Oracle, Double> entry : RMSE.entrySet()) {
 
-
-            // actual=(entry.getValue()[0]*VarianceRMSE(entry.getValue())[0]+entry.getValue()[1]*VarianceRMSE(entry.getValue())[1])/2;
-            actual = (entry.getValue()[0] + entry.getValue()[1]) / 2;
+            actual = entry.getValue();
             if (actual <= AVGrmse) {
                AVGrmse = actual;
                best = entry.getKey();

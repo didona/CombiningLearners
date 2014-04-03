@@ -8,10 +8,9 @@ import org.apache.commons.logging.LogFactory;
 import weka.core.Instance;
 import weka.core.Instances;
 
-import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 /**
  * @author Diego Didona
@@ -23,13 +22,24 @@ public abstract class Learner_D {
    protected String m_TestSetFile = null;
    protected Instance m_TestSet = null;
    protected String m_TrainingFile = null;
-   protected HashMap<Oracle, Double[]> RMSE;
+   protected HashMap<Oracle, Double> RMSE;
    protected Instances Neighbourshood;
    protected double[] distances;
    protected double[][] SquaredErrors;
 
 
    private final static Log logger = LogFactory.getLog(Learner_D.class);
+
+   private enum targets {
+      Throughput(-1), WriteThroughput(1), ReadThroughput(0), ReadResponseTime(0), WriteResponseTime(1), ReadAbortProb(0), WriteAbortProb(1);
+      private int clazz;
+
+      targets(int clazz) {
+         this.clazz = clazz;
+      }
+
+
+   }
 
 
    protected Instances filterInstancesIfNeeded(Instances toFilter) {
@@ -39,29 +49,27 @@ public abstract class Learner_D {
    }
 
    /**
-    * Valid value for Parameter are: throughput abortRate responseTime everyone separated by a space
+    * Only one parameter among throughput, writeResponseTime, readResponseTime, writeThroughput, readThroughput,
+    * abortRate
     */
 
    //I would not choose a learner basing on the average among the errors on different features!
    //Every feature should have its own learner
-   protected HashMap<Oracle, Double[]> computeRMSE(String Parameter) throws Exception {
-      HashMap<Oracle, Double[]> rmse = new HashMap<Oracle, Double[]>();
-      Double[] RMSe;
-      double errorOutputRO;
-      double errorOutputWO;
+   protected HashMap<Oracle, Double> computeRMSE(String Parameter) throws Exception {
+      HashMap<Oracle, Double> rmse = new HashMap<Oracle, Double>();
+      double RMSe;
 
-      Method method;
+
       OutputOracle outputValidationSet;
       OutputOracle outputOracle;
-      StringTokenizer token;
-      String outputname;
 
       SquaredErrors = new double[2][Neighbourshood.numInstances()];
 
+      targets targetParameter = targets.valueOf(Parameter);
+
       for (Map.Entry<Oracle, HashMap<Instance, OutputOracle>> entry : DataSets.predictionResults.entrySet()) {
          double consideredInstances = 0;
-         double SEOutputRO = 0D;
-         double SEOutputWO = 0D;
+         double err = 0D;
          for (int i = 0; i < Neighbourshood.numInstances(); i++) {
 
             //Get the i-th instance from the neighborhood
@@ -72,49 +80,63 @@ public abstract class Learner_D {
             outputOracle = entry.getValue().get(inst);
 
             logger.info("Instance :" + inst + "\n" + "validationOutput= " + outputValidationSet + "\n" + "Oracle Output= " + outputOracle + "\n" + "Distance= " + distances[i]);
-            token = new StringTokenizer(Parameter);
-
-            while (token.hasMoreTokens()) {
-
-               outputname = token.nextToken();
-
-               method = OutputOracle.class.getMethod(outputname, int.class);
-
-               errorOutputRO = (Double) method.invoke(outputValidationSet, 0) - (Double) method.invoke(outputOracle, 0);
-               errorOutputWO = (Double) method.invoke(outputValidationSet, 1) - (Double) method.invoke(outputOracle, 1);
-
-               if (considerInstances(i)) {//does not consider in the accuracy computation  points too distant
-                  consideredInstances++;
-                  SEOutputRO = SEOutputRO + Math.pow(errorOutputRO, 2);
-                  logger.info("error on " + outputname + "RO prediction for " + entry.getKey().toString().split("@")[0] + " = " + errorOutputRO);
 
 
-                  SEOutputWO = SEOutputWO + Math.pow(errorOutputWO, 2);
-                  logger.info("error on " + outputname + "WO prediction for " + entry.getKey().toString().split("@")[0] + " = " + errorOutputWO);
-
-
-                  SquaredErrors[0][i] = SEOutputRO;
-                  SquaredErrors[1][i] = SEOutputWO;
-
-
-               } else {
-                  logger.info("error on " + outputname + "WO prediction for " + entry.getKey().toString().split("@")[0] + " = " + errorOutputWO);
-                  logger.info("error on " + outputname + "RO prediction for " + entry.getKey().toString().split("@")[0] + " = " + errorOutputRO);
-                  logger.info("point not considered during accuracy computation due to the high AVG contribution (" + distances[i] + "> 1* ");
-               }
-
+            if (considerInstances(i)) {
+               consideredInstances++;
+               err += computePredictionError(targetParameter, outputValidationSet, outputOracle);
             }
 
          }
-         RMSe = new Double[2];
-         RMSe[0] = Math.sqrt(SEOutputRO) / consideredInstances;
-         RMSe[1] = Math.sqrt(SEOutputWO) / consideredInstances;
-         logger.info("RESULT considering " + Parameter + " of  " + entry.getKey().toString().split("@")[0] + ":" + "RMSERO =" + RMSe[0] + "  RMSEWO =" + RMSe[1]);
+         RMSe = err / consideredInstances;
+         logger.info("RESULT considering " + Parameter + " of  " + entry.getKey().toString().split("@")[0] + ":" + "RMSE =" + RMSe);
          rmse.put(entry.getKey(), RMSe);
       }
       return rmse;
    }
 
+   private static double rootError(double a, double b) {
+      return Math.pow(a - b, 2);
+   }
+
+
+   private double computePredictionError(targets target, OutputOracle real, OutputOracle pred) {
+      switch (target) {
+         case Throughput: {
+            double r = real.throughput(0) + real.throughput(1);
+            double p = pred.throughput(0) + pred.throughput(1);
+            return rootError(r, p);
+         }
+         case ReadThroughput: {
+            double r = real.throughput(0);
+            double p = pred.throughput(0);
+            return rootError(r, p);
+         }
+         case WriteThroughput: {
+            double r = real.throughput(1);
+            double p = pred.throughput(1);
+            return rootError(r, p);
+         }
+         case ReadResponseTime: {
+            double r = real.responseTime(0);
+            double p = pred.responseTime(0);
+            return rootError(r, p);
+         }
+         case WriteResponseTime: {
+            double r = real.responseTime(1);
+            double p = pred.responseTime(1);
+            return rootError(r, p);
+         }
+         case WriteAbortProb: {
+            double r = real.abortRate(1);
+            double p = pred.abortRate(1);
+            return rootError(r, p);
+         }
+         default: {
+            throw new IllegalArgumentException(target + " is not a valid target. Possible values are " + Arrays.toString(targets.values()));
+         }
+      }
+   }
 
    protected abstract boolean considerInstances(int i);
 
